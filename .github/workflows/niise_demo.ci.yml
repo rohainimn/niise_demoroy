@@ -27,7 +27,7 @@ jobs:
           )
 
       - name: Set Up Java Environment
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '17'
@@ -40,6 +40,9 @@ jobs:
 
       - name: Deliver Executable Artifact to Deployment Folder
         shell: cmd
+        env:
+            GITHUB_ACTIONS_RUNNER_TLS_NO_VERIFY: "1"
+            NODE_TLS_REJECT_UNAUTHORIZED: "0"
         run: |
           if not exist "C:\niise-deployment" (
               mkdir "C:\niise-deployment"
